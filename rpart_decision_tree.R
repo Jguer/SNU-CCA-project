@@ -1,8 +1,10 @@
-install.packages("heuristica")
-install.packages("Rcpp")
-install.packages("caret")
-library(caret)
-install.packages("e1071")
+#!/usr/bin/Rscript
+#This is code pertinent to Final Project.
+
+require(heuristica)
+require(Rcpp)
+require(caret)
+require(e1071)
 data <- read.csv("voice.csv", header=TRUE, sep=";")
 names(data) <- c("id", "meanfreq", "sd", "median", "Q25", "Q75", "IQR", "skew", "kurt", "sp.ent", "sfm", "mode", "centroid", "meanfun", "minfun", "maxfun", "meandom", "mindom", "maxdom", "dfrange", "modindx", "label")
 data$label <- as.factor(data$label)
