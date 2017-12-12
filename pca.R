@@ -17,6 +17,13 @@ dim(voice_data)
 
 
 result <- PCA(voice_data[,2:21]) # graphs generated automatically
+
+library(nFactors)
+ev <- eigen(cor(voice_data[,2:21])) # get eigenvalues
+ap <- parallel(subject=nrow(voice_data[,2:21]),var=ncol(voice_data[,2:21]),
+  rep=100,cent=.05)
+nS <- nScree(x=ev$values, aparallel=ap$eigen$qevpea)
+plotnScree(nS)
 # Import Data
 # Prepare PCA
 #label_col <- which(colnames(voice_data) == "label")

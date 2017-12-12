@@ -12,16 +12,18 @@ names(data) <- c("id", "meanfreq", "sd", "median", "Q25", "Q75", "IQR", "skew",
 data$label <- as.factor(data$label)
 # Load and name data
 
-k <- 2
-kc <- kmeans(data[,2:21], k)
-table(kc$cluster, data[,22])
+v <- c(2,3,5,10,20)
+x <- data[,c(2,14)]
 
-ggplot(data[,2:9], aes(data[,'meanfreq'], data[,'meanfun'], color =
-                       kc$cluster)) + geom_point() + labs(title ="K-means
-clustering", x ="meanfreq", y = "meanfun")
-ggsave("kmeans.png", width = 5, height = 5)
+for (k in v) {
+    kc <- kmeans(x, k)
+    #table(kc$cluster, x)
 
-ggplot(data[,2:9], aes(data[,'meanfreq'], data[,'meanfun'], color =
-                       data[,'label'])) + geom_point() + labs(title ="Original
-Classes", x ="meanfreq", y = "meanfun")
-ggsave("original.png", width = 5, height = 5)
+    ggplot(x, aes(data[,'meanfreq'], data[,'meanfun'], color =
+                           kc$cluster)) + geom_point() + labs(title ="K-means
+    clustering", x ="meanfreq", y = "meanfun")
+    str=sprintf("kmeans k=%d.png",k)
+    ggsave(str, width = 5, height = 5)
+
+}
+

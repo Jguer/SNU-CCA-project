@@ -12,8 +12,8 @@ names(data) <- c("id", "meanfreq", "sd", "median", "Q25", "Q75", "IQR", "skew",
                  "kurt", "sp.ent", "sfm", "mode", "centroid", "meanfun",
                  "minfun", "maxfun", "meandom", "mindom", "maxdom", "dfrange",
                  "modindx", "label")
-data$label <- as.factor(data$label)
-table(data$label)
+#data$label <- as.factor(data$label)
+#table(data$label)
 
 set.seed(3651)
 v <- c(0.60, 0.66,0.75,0.80)
@@ -25,7 +25,7 @@ for (i in v){
     dtree <-rpart(label ~ meanfreq + sd + median + Q25 + Q75 + IQR + skew + kurt +
                   sp.ent + sfm + mode + centroid + meanfun + minfun + maxfun +
                   meandom + mindom + maxdom + dfrange + modindx,  train, method="class")
-    rpart.plot(dtree)
+
     dtree_pred <- predict(dtree, test, type="class")
-    confusionMatrix(dtree_pred, test$label)$overall[1]
+    rpart.plot(dtree)
 }
